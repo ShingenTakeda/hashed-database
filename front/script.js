@@ -13,8 +13,26 @@ async function loadData() {
   //   const data = await response.json();
   //   document.getElementById("result-list").innerHTML = `<li>${data.name}</li>`;
 
-  //mockado pra teste pq tamo sem URL
-  document.getElementById("result-list").innerHTML = `<li>a</li>`;
+
+  //Mock pra visualizacao da lista com mais de um elemento ou so um...
+  dataLength = [{ name: "Joaozinho da Silva" }, { name: "Carlos da Cunha" }];
+  dataNoLength = { name: "Joaozinho da Silva" };
+
+  mocks = [dataLength, dataNoLength];
+
+  choice = Math.round(Math.random());
+
+  if (mocks[choice].length != null) {
+    document.getElementById("result-list").innerHTML = dataLength
+      .map((d) => {
+        return `<li>${d.name}</li>`;
+      })
+      .join("");
+  } else {
+    document.getElementById(
+      "result-list"
+    ).innerHTML = `<li>${dataNoLength.name}</li>`;
+  }
 }
 
 async function insertData() {
