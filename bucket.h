@@ -4,24 +4,39 @@
 #include <stdint.h>
 #include <sys/types.h>
 
+#define TUPLE_SIZE 2
+
 // Basically a hash map with colision, i guess
 
 // TODO: Zero init structures if no args are passed
 
 typedef struct
 {
-	String Key;
+	uint64_t Key;
 	String Value;
 } BucketTuple;
 
 typedef struct
 {
-	Vector tuples;
+	BucketTuple *data;
+	uint64_t size;
+	uint64_t alloc_size;
+} TupleVector;
+
+typedef struct
+{
 	void *next_bucket;
 	void *prev_bucket;
 	uint64_t index;
-	uint8_t num_of_buckets;
+	uint8_t num_of_tubles;
 } Bucket;
+
+typedef struct
+{
+	Bucket *data;
+	uint64_t size;
+	uint64_t alloc_size;
+} BucketVector;
 
 typedef struct
 {
@@ -34,7 +49,7 @@ typedef struct
 Bucket functions
 /////////////////////////////////////*/
 
-Bucket *init_bucket(Vector *tuples);
+Bucket *init_bucket(uint64_t key, String value);
 String bucket_get_key(Bucket *bucket, uint64_t index);
 String bucket_get_value(Bucket *bucket, uint64_t index);
 Bucket *bucket_get_next(Bucket *bucket);

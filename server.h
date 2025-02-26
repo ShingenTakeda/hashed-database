@@ -31,10 +31,6 @@
 
 #endif
 
-#include <stdint.h>
-#include <stdio.h>
-#include <time.h>
-
 #include "common.h"
 
 // Mostly for windows

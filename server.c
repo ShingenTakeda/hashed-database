@@ -1,11 +1,3 @@
-#include <bits/getopt_core.h>
-#include <netdb.h>
-#include <netinet/in.h>
-#include <stddef.h>
-#include <stdio.h>
-#include <string.h>
-#include <sys/socket.h>
-
 #include "server.h"
 
 void init_windows_socket()

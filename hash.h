@@ -1,7 +1,6 @@
 #pragma once
-#include <stdint.h>
-
 #include "common.h"
 
-String *sha256(String *str);
-String *encrypt(String *str);
+#define TABLE_SIZE 10
+
+uint64_t hash(String *str);
