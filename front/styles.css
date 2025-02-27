@@ -2,53 +2,107 @@ body {
   background-color: #121212;
   color: #ffffff;
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  overflow-x: hidden;
   text-align: center;
 }
-.container {
-  max-width: 600px;
-  margin: auto;
+
+#content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 1000px;
   padding: 20px;
+}
+
+.text-section {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#tables-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20px;
+  width: 100%;
+}
+
+.table-wrapper {
+  width: 30%;
+  min-width: 300px;
+  max-height: 300px;
+  overflow-y: auto;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+table {
+  width: 20%;
+  border-collapse: collapse;
   background-color: #1e1e1e;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 8px;
+  overflow: hidden;
 }
-.tab-button {
-  background-color: #333;
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  margin: 5px;
-  cursor: pointer;
-  border-radius: 5px;
-  transition: background 0.3s;
-}
-.tab-button:hover {
-  background-color: #555;
-}
-.tab-content {
-  display: none;
-  margin-top: 20px;
-  padding: 20px;
-  background-color: #2a2a2a;
-  border-radius: 5px;
-}
-input,
-button {
+
+th,
+td {
+  border: 1px solid #333;
   padding: 10px;
-  margin: 5px;
-  border: none;
-  border-radius: 5px;
+  text-align: center;
 }
-input {
-  width: 80%;
+
+thead {
   background-color: #333;
-  color: white;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
-button {
-  background-color: #444;
-  color: white;
-  cursor: pointer;
+
+tbody {
+  display: block;
+  max-height: 300px;
+  overflow-y: auto;
 }
-button:hover {
-  background-color: #666;
+
+tr {
+  display: table;
+  width: 100%;
+  table-layout: fixed;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  #tables-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .table-wrapper {
+    width: 90%;
+  }
 }

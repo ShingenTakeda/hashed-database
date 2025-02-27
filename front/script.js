@@ -1,121 +1,171 @@
-const controleDeTela = [
-  {
-    acao: "select-id",
-    endpoint: "btnSelect"
-  },
-];
+const apiUrl = "";
+let recordsPerPage;
+let searchTime, scanTime;
 
-//TODO: REVER A NECESSIDADE
-// {
-//   acao: "insert-id",
-//   endpoint: "btnInsert"
-// },
-// {
-//   acao: "insert-name",
-//   endpoint: "btnInsert"
-// },
-// {
-//   acao: "delete-id",
-//   endpoint: "btnDelete"
-// },
-// {
-//   acao: "update-id",
-//   endpoint: "btnUpdate"
-// },
-// {
-//   acao: "update-name",
-//   endpoint: "btnUpdate"
-// },
+// Simulação de API
+function mockApi(endpoint, data = null) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (endpoint === "getPages") {
+        resolve({
+          pages: [
+            {
+              number: 1,
+              records: Array.from(
+                { length: data.recordsPerPage },
+                (_, i) => `Registro ${i + 1}`
+              ),
+            },
+            {
+              number: 892,
+              records: Array.from(
+                { length: data.recordsPerPage },
+                (_, i) => `Registro ${i + 1 + 1000}`
+              ),
+            },
+          ],
+        });
+      } else if (endpoint === "search") {
+        resolve({
+          pages: [
+            {
+              number: Math.floor(Math.random() * 900),
+              records: Array.from(
+                { length: recordsPerPage },
+                (_, i) => `Resultado ${i + 1}`
+              ),
+            },
+          ],
+        });
+      } else if (endpoint === "tableScan") {
+        resolve({
+          pages: [
+            {
+              number: Math.floor(Math.random() * 900),
+              records: Array.from(
+                { length: recordsPerPage },
+                (_, i) => `Scan ${i + 1}`
+              ),
+            },
+          ],
+          stats: {
+            collisionRate: (Math.random() * 10).toFixed(2),
+            overflowRate: (Math.random() * 10).toFixed(2),
+            indexCost: Math.floor(Math.random() * 100),
+            scanCost: Math.floor(Math.random() * 1000),
+          },
+        });
+      }
+    }, 500);
+  });
+}
 
-controleDeTela.forEach(obj => {
-  document.getElementById(obj.acao).addEventListener('keyup', key => {
-    if (key.code === "Enter") {
-      document.getElementById(obj.endpoint).click()
-    }
-  })
+document.addEventListener("DOMContentLoaded", () => {
+  const params = new URLSearchParams(window.location.search);
+  recordsPerPage = params.get("records") || 10;
+  if (window.location.pathname.includes("results.html")) {
+    fetchData(recordsPerPage);
+  }
 });
 
-function validarChave(obj) {
-  if(obj.value == "") {
-    alert("A Chave de busca não pode estar vazia, por favor digite uma palavra em inglês qualquer...");
-    return true;
-  }
+function sendData() {
+  recordsPerPage = document.getElementById("recordsPerPage").value;
 
-  if(obj.value.indexOf(' ') >= 0) {
-    alert("Tente escrever somente uma palavra ou remova o espaço em branco");
-    return true;
-  }
-
-  return false;
-}
-
-function showTab(tabId) {
-  document.querySelectorAll(".tab-content").forEach((tab) => {
-    tab.style.display = "none";
+  mockApi("getPages", { recordsPerPage }).then((data) => {
+    localStorage.setItem("initialData", JSON.stringify(data));
+    window.location.href = `results.html?records=${recordsPerPage}`;
   });
-  document.getElementById(tabId).style.display = "block";
-}
-
-async function loadData() {
-  const chave = document.getElementById("select-id");
-
-  if(validarChave(chave)) return;
-
-  const id = chave.value.trim();
-  // const response = await fetch(`https://api.mitsu/hashedDatabase/select/${id}`, {
-  //   method: "GET",
-  // });
-  // const data = await response.json();
-  // document.getElementById("result-list").innerHTML = `<li>${data.name}</li>`;
-
-
-  //Mock pra visualizacao da lista com mais de um elemento ou so um...
-  dataLength = [{ name: "Joaozinho da Silva" }, { name: "Carlos da Cunha" }];
-  dataNoLength = { name: "Joaozinho da Silva" };
-
-  mocks = [dataLength, dataNoLength];
-
-  choice = Math.round(Math.random());
-
-  if (mocks[choice].length != null) {
-    document.getElementById("result-list").innerHTML = dataLength
-      .map((d) => {
-        return `<li>${d.name}</li>`;
-      })
-      .join("");
-  } else {
-    document.getElementById(
-      "result-list"
-    ).innerHTML = `<li>${dataNoLength.name}</li>`;
-  }
-}
-
-async function insertData() {
-  //   const id = document.getElementById("insert-id").value;
-  //   const name = document.getElementById("insert-name").value;
-  //   await fetch("https://api.mitsu/hashedDatabase", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ id, name }),
+  // fetch(`${apiUrl}/getPages`, {
+  //   method: "POST",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({ recordsPerPage }),
+  // })
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     localStorage.setItem("initialData", JSON.stringify(data));
+  //     window.location.href = `results.html?records=${recordsPerPage}`;
   //   });
-  //   alert("Inserido com sucesso!");
 }
 
-async function updateData() {
-  //   const id = document.getElementById("update-id").value;
-  //   const name = document.getElementById("update-name").value;
-  //   await fetch(`https://api.mitsu/hashedDatabase/update/${id}`, {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ name }),
-  //   });
-  //   alert("Atualizado com sucesso!");
+function fetchData(records) {
+  let data = JSON.parse(localStorage.getItem("initialData"));
+  displayData(data);
 }
 
-async function deleteData() {
-  //   const id = document.getElementById("delete-id").value;
-  //   await fetch(`https://api.mitsu/hashedDatabase/delete/${id}`, {
-  //     method: "DELETE",
+function displayData(data) {
+  let resultsDiv = document.getElementById("tables-container");
+  resultsDiv.innerHTML = "";
+
+  data.pages.forEach((page) => {
+    // let pag = `<h4>Página ${page.number}</h4>`;
+    let table = `
+      <table>
+        <tr>
+          <th>Dados</th>
+        </tr>`;
+
+    page.records.forEach((record) => {
+      table += `<tr>
+        <td>${record}</td>
+      </tr>`;
+    });
+    table += "</table>";
+    resultsDiv.innerHTML += table;
+  });
+}
+
+function search() {
+  let key = document.getElementById("searchKey").value;
+  let startTime = performance.now();
+
+  mockApi("search", { key }).then((data) => {
+    let endTime = performance.now();
+    searchTime = endTime - startTime;
+    document.getElementById("tableScanBtn").classList.remove("disabled");
+    displayData(data);
+  });
+  // fetch(`${apiUrl}/search?key=${key}&records=${recordsPerPage}`)
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     let endTime = performance.now();
+  //     searchTime = endTime - startTime;
+  //     document.getElementById("tableScanBtn").classList.remove("disabled");
+  //     displayData(data);
   //   });
-  //   alert("Deletado com sucesso!");
+}
+
+function tableScan() {
+  let key = document.getElementById("searchKey").value;
+  let startTime = performance.now();
+
+  mockApi("tableScan", { key }).then((data) => {
+    let endTime = performance.now();
+    scanTime = endTime - startTime;
+    displayData(data);
+    displayStatistics(data.stats);
+  });
+
+  // fetch(`${apiUrl}/tableScan?key=${key}&records=${recordsPerPage}`)
+  //   .then((response) => response.json())
+  //   .then((data) => {
+  //     let endTime = performance.now();
+  //     scanTime = endTime - startTime;
+  //     displayData(data);
+  //     displayStatistics(data.stats);
+  //   });
+}
+
+function displayStatistics(stats) {
+  let statsDiv = document.getElementById("statistics");
+  statsDiv.innerHTML = `
+        <p>Taxa de colisões: ${stats.collisionRate}%</p>
+        <p>Taxa de overflows: ${stats.overflowRate}%</p>
+        <p>Estimativa de custo da busca por índice: ${
+          stats.indexCost
+        } leituras</p>
+        <p>Estimativa de custo do table scan: ${stats.scanCost} leituras</p>
+        <p>Diferença de tempo entre busca e table scan: ${(
+          scanTime - searchTime
+        ).toFixed(2)}ms</p>
+    `;
 }
