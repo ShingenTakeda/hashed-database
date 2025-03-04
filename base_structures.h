@@ -28,5 +28,5 @@ char string_at(uint32_t index, String *string);
 char *string_data(String *string);
 
 Vector *vector_init(void *data, uint64_t element_size);
-bool vector_insert(void *data, Vector *vector);
+void vector_insert(void *data, Vector *vector);
 void *vector_get(uint64_t index, Vector *vector);

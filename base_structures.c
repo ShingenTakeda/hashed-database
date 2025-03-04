@@ -56,7 +56,7 @@ Vector *vector_init(void *data, uint64_t element_size)
 	{
 		ptr->data = (uint8_t *)calloc(VECTOR_DEFAULT_SIZE, element_size);
 		ptr->element_size = element_size;
-		ptr->reserved_size = VECTOR_DEFAULT_SIZE;
+		ptr->reserved_size = element_size * VECTOR_DEFAULT_SIZE;
 
 		if (data != NULL)
 		{
@@ -74,5 +74,21 @@ Vector *vector_init(void *data, uint64_t element_size)
 	return ptr;
 }
 
-bool vector_insert(void *data, Vector *vector);
-void *vector_get(uint64_t index, Vector *vector);
+void vector_insert(void *data, Vector *vector)
+{
+	memcpy(&vector->data[vector->element_size * vector->size], data, vector->element_size);
+	if (vector->size++ >= (vector->reserved_size / vector->element_size))
+	{
+		vector->data = realloc(vector->data, vector->element_size * (vector->size * GROWTH_RATE));
+		vector->reserved_size = vector->element_size * (vector->size * GROWTH_RATE);
+	}
+}
+
+void *vector_get(uint64_t index, Vector *vector)
+{
+	if (index < vector->size)
+	{
+		return (void *)&vector->data[(vector->element_size * index)];
+	}
+	return NULL;
+}
