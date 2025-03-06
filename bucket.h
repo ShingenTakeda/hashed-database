@@ -1,9 +1,5 @@
 #pragma once
-#include "base_structures.h"
 #include "common.h"
-#include <cstdint>
-#include <stdint.h>
-#include <sys/types.h>
 
 #define NUM_OF_TUPLES 2
 
@@ -14,7 +10,7 @@
 typedef struct
 {
 	uint64_t Key;
-	String Value;
+	String *Value;
 } BucketTuple;
 
 typedef struct
