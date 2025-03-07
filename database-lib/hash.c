@@ -12,3 +12,16 @@ uint64_t hash(String *str)
 
 	return hash_value;
 }
+
+void print_hash(String *string)
+{
+	printf("%s => %lu\n", string->str, hash(string));
+}
+
+void print_table(String **table, uint64_t size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		print_hash(table[i]);
+	}
+}

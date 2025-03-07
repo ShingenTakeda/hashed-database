@@ -1,0 +1,46 @@
+[
+{
+  "directory": "/home/mitsuo/Documents/c/hashed-database",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-O3", "-Isrc", "-Iextern", "-I", "/home/mitsuo/.xmake/packages/r/raylib/5.0/aeed26e13a7a466f9d7c7ad6dd3b75c2/include", "-DNDEBUG", "-o", "build/.objs/database/linux/x86_64/release/src/database.c.o", "src/database.c"],
+  "file": "src/database.c"
+},
+{
+  "directory": "/home/mitsuo/Documents/c/hashed-database",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-O3", "-Isrc", "-Iextern", "-I", "/home/mitsuo/.xmake/packages/r/raylib/5.0/aeed26e13a7a466f9d7c7ad6dd3b75c2/include", "-DNDEBUG", "-o", "build/.objs/database/linux/x86_64/release/src/hash.c.o", "src/hash.c"],
+  "file": "src/hash.c"
+},
+{
+  "directory": "/home/mitsuo/Documents/c/hashed-database",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-O3", "-Isrc", "-Iextern", "-I", "/home/mitsuo/.xmake/packages/r/raylib/5.0/aeed26e13a7a466f9d7c7ad6dd3b75c2/include", "-DNDEBUG", "-o", "build/.objs/database/linux/x86_64/release/src/page.c.o", "src/page.c"],
+  "file": "src/page.c"
+},
+{
+  "directory": "/home/mitsuo/Documents/c/hashed-database",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-O3", "-Isrc", "-Iextern", "-I", "/home/mitsuo/.xmake/packages/r/raylib/5.0/aeed26e13a7a466f9d7c7ad6dd3b75c2/include", "-DNDEBUG", "-o", "build/.objs/database/linux/x86_64/release/src/allocators.c.o", "src/allocators.c"],
+  "file": "src/allocators.c"
+},
+{
+  "directory": "/home/mitsuo/Documents/c/hashed-database",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-O3", "-Isrc", "-Iextern", "-I", "/home/mitsuo/.xmake/packages/r/raylib/5.0/aeed26e13a7a466f9d7c7ad6dd3b75c2/include", "-DNDEBUG", "-o", "build/.objs/database/linux/x86_64/release/src/base_structures.c.o", "src/base_structures.c"],
+  "file": "src/base_structures.c"
+},
+{
+  "directory": "/home/mitsuo/Documents/c/hashed-database",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-O3", "-Isrc", "-Iextern", "-I", "/home/mitsuo/.xmake/packages/r/raylib/5.0/aeed26e13a7a466f9d7c7ad6dd3b75c2/include", "-DNDEBUG", "-o", "build/.objs/database/linux/x86_64/release/src/main.c.o", "src/main.c"],
+  "file": "src/main.c"
+},
+{
+  "directory": "/home/mitsuo/Documents/c/hashed-database",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-O3", "-Isrc", "-Iextern", "-I", "/home/mitsuo/.xmake/packages/r/raylib/5.0/aeed26e13a7a466f9d7c7ad6dd3b75c2/include", "-DNDEBUG", "-o", "build/.objs/database/linux/x86_64/release/src/bucket.c.o", "src/bucket.c"],
+  "file": "src/bucket.c"
+},
+{
+  "directory": "/home/mitsuo/Documents/c/hashed-database",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-O3", "-Isrc", "-Iextern", "-I", "/home/mitsuo/.xmake/packages/r/raylib/5.0/aeed26e13a7a466f9d7c7ad6dd3b75c2/include", "-DNDEBUG", "-o", "build/.objs/database/linux/x86_64/release/src/storage.c.o", "src/storage.c"],
+  "file": "src/storage.c"
+},
+{
+  "directory": "/home/mitsuo/Documents/c/hashed-database",
+  "arguments": ["/usr/bin/gcc", "-c", "-m64", "-fvisibility=hidden", "-O3", "-Isrc", "-Iextern", "-I", "/home/mitsuo/.xmake/packages/r/raylib/5.0/aeed26e13a7a466f9d7c7ad6dd3b75c2/include", "-DNDEBUG", "-o", "build/.objs/database/linux/x86_64/release/src/server.c.o", "src/server.c"],
+  "file": "src/server.c"
+}]
