@@ -2,3 +2,4 @@ database
 build
 .cache
 .xmake
+compile_commands.json
