@@ -1,5 +1,4 @@
 #pragma once
-#include "base_structures.h"
 #include "common.h"
 
 // Serialize and deserialize into a binary blob
