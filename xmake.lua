@@ -18,3 +18,10 @@ target("database-gui")
 	add_includedirs("database-gui/", "extern/", "database-lib/")
 	add_packages("raylib")
 	add_deps("database-lib")
+
+
+target("test")
+	set_kind("binary")
+	add_files("test/*.c")
+	add_includedirs("test/", "extern/", "database-lib/")
+	add_deps("database-lib")
