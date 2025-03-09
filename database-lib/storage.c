@@ -1,8 +1,7 @@
 #include "storage.h"
-#include "allocators.h"
 #include "base_structures.h"
-#include <stdlib.h>
-#include <string.h>
+#include <stdio.h>
+#include <sys/types.h>
 
 Page *page_init()
 {
@@ -18,6 +17,14 @@ Page *page_init()
 	}
 
 	return NULL;
+}
+
+void print_page(Page *page)
+{
+	for (int i = 0; i < page->strings->size; i++)
+	{
+		println_s((String *)vector_get(i, page->strings));
+	}
 }
 
 // TODO:Do you due diligence here and check for errors
@@ -69,10 +76,53 @@ bool book_new_page(Book *book)
 	}
 	vector_insert(ptr, book->pages);
 
-	free(ptr->arena.buf);
 	free(ptr);
 
 	return true;
 }
-uint64_t book_num_pages(Book *book);
-Page *book_get_page(uint64_t index);
+
+void book_write_to_page(char *string, Book *book)
+{
+	bool test = page_alloc_string(string, vector_get(book->pages->size - 1, book->pages));
+
+	if (test == false)
+	{
+		test = book_new_page(book);
+		if (test == false)
+		{
+			printf("Failed to allocate page to book\n");
+			exit(1);
+		}
+
+		test = page_alloc_string(string, vector_get(book->pages->size - 1, book->pages));
+		if (test == false)
+		{
+			printf("Failed to allocate string to page to book\n");
+			exit(1);
+		}
+	}
+}
+
+void book_page_print(uint64_t index, Book *book)
+{
+	print_page(book_get_page(index, book));
+}
+
+void book_print_all_pages(Book *book)
+{
+	for (uint64_t i = 0; i < book->pages->size; i++)
+	{
+		printf("page number: %lu\n", i);
+		book_page_print(i, book);
+	}
+}
+
+uint64_t book_num_pages(Book *book)
+{
+	return book->pages->size;
+}
+
+Page *book_get_page(uint64_t index, Book *book)
+{
+	return (Page *)vector_get(index, book->pages);
+}

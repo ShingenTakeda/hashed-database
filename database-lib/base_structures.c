@@ -1,4 +1,5 @@
 #include "base_structures.h"
+#include <stdio.h>
 
 String *string_init(char *string)
 {
@@ -51,7 +52,11 @@ char *string_data(String *string)
 
 void println_s(String *string)
 {
-	printf("%s\n", string->str);
+	for (int i = 0; i < string->size; i++)
+	{
+		printf("%c", string_at(i, string));
+	}
+	printf("\n");
 }
 
 Vector *vector_init(void *data, uint64_t element_size)
