@@ -1,7 +1,5 @@
 #include "storage.h"
-#include "base_structures.h"
-#include <stdio.h>
-#include <sys/types.h>
+#include <stdint.h>
 
 Page *page_init()
 {
@@ -101,6 +99,10 @@ void book_write_to_page(char *string, Book *book)
 			exit(1);
 		}
 	}
+}
+
+void book_write_to_page_at(uint64_t index, char *string, Book *book)
+{
 }
 
 void book_page_print(uint64_t index, Book *book)

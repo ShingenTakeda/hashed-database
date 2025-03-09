@@ -1,0 +1,2 @@
+1.Write file to the Book structure
+2.Use a hash table to point to the string, not store

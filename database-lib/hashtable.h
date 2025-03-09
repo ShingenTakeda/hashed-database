@@ -1,9 +1,11 @@
 #pragma once
-#include "common.h"
+#include <common.h>
+
+#define TABLE_SIZE 10
 
 #define NUM_OF_TUPLES 2
 
-// Basically a hash map with colision, i guess
+// Basically a hash table with colision, i guess
 
 // TODO: Zero init structures if no args are passed
 
@@ -25,6 +27,10 @@ typedef struct
 	Vector *list;
 
 } BucketList;
+
+uint64_t hash(String *str);
+void print_hash(String *string);
+void print_table(String **table, uint64_t size);
 
 /*//////////////////////////////////////
 Bucket functions
