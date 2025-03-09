@@ -24,7 +24,7 @@ uint64_t string_size(String *string)
 	return string->size;
 }
 
-uint8_t string_empty(String *string)
+bool string_empty(String *string)
 {
 	if (string->size == 0)
 	{
@@ -47,6 +47,11 @@ char string_at(uint32_t index, String *string)
 char *string_data(String *string)
 {
 	return string->str;
+}
+
+void println_s(String *string)
+{
+	printf("%s\n", string->str);
 }
 
 Vector *vector_init(void *data, uint64_t element_size)

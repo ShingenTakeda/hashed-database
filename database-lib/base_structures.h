@@ -23,10 +23,13 @@ typedef struct
 
 String *string_init(char *string);
 uint64_t string_size(String *string);
-uint8_t string_empty(String *string);
+bool string_empty(String *string);
 char string_at(uint32_t index, String *string);
 char *string_data(String *string);
+void println_s(String *string);
+bool string_free(String *string);
 
 Vector *vector_init(void *data, uint64_t element_size);
 void vector_insert(void *data, Vector *vector);
 void *vector_get(uint64_t index, Vector *vector);
+bool vector_free(String *string);
