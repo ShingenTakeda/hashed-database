@@ -1,4 +1,4 @@
-#include "hash.h"
+#include "hashtable.h"
 
 uint64_t hash(String *str)
 {

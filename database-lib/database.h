@@ -1,6 +1,7 @@
 #pragma once
 #include <common.h>
+#include <storage.h>
 
-bool init_database();
-bool init_database_from_text_file(const char *filepath);
-bool init_database_from_binary_file(const char *filepath);
+void init_database(Book *book);
+void init_database_from_text_file(const char *filepath, Book *book);
+void init_database_from_binary_file(const char *filepath, Book *book);
