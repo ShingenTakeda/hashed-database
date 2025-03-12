@@ -57,28 +57,22 @@ void user_init_database(UserBook *book, size_t num_of_string)
 	}
 }
 
-void user_init_database_from_text_file(const char *filepath, UserBook *book, size_t num_of_string)
+void user_init_database_from_text_file(const char *filepath, UserBook *book)
 {
 	FILE *file = fopen(filepath, "r");
 	if (file == NULL)
 	{
 		exit(1);
 	}
-	if (num_of_string == 0)
-	{
-		book = user_book_init(DEFAULT_NUM_STRING);
-	}
-	else
-	{
-		book = user_book_init(num_of_string);
-	}
+
 	char line_buf[256];
 
 	while (fgets(line_buf, sizeof(line_buf), file))
 	{
-		line_buf[strcspn(line_buf, "\n")] = 0;
+		line_buf[strcspn(line_buf, "\n")] = '\0';
 		user_book_write_to_page(line_buf, book);
 	}
+	fclose(file);
 }
 
 void user_init_database_from_binary_file(const char *filepath, UserBook *book, size_t num_of_string)
