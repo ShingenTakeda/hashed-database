@@ -1,8 +1,4 @@
-#define CLAY_IMPLEMENTATION
-
-#include "../extern/clay/clay.h"
-
-#include "../extern/clay/clay_renderer_raylib.c"
+#include "common.h"
 
 const uint32_t FONT_ID_BODY_24 = 0;
 const uint32_t FONT_ID_BODY_16 = 1;
