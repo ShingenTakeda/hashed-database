@@ -87,7 +87,7 @@ Vector *vector_init(void *data, uint64_t element_size)
 void vector_insert(void *data, Vector *vector)
 {
 	memcpy(&vector->data[vector->element_size * vector->size], data, vector->element_size);
-	if (vector->size++ >= (vector->reserved_size / vector->element_size))
+	if (vector->size++ >= (vector->reserved_size / vector->element_size) / 2)
 	{
 		vector->data = realloc(vector->data, vector->element_size * (vector->size * GROWTH_RATE));
 		vector->reserved_size = vector->element_size * (vector->size * GROWTH_RATE);
